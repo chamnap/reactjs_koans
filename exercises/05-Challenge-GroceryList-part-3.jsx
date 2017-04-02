@@ -36,6 +36,7 @@ class GroceryList extends React.Component {
     if(this.state.newGroceryName) {
       let newGroceryItem = { name: this.state.newGroceryName };
       this.setState({
+        newGroceryName: "",
         groceries: this.state.groceries.concat([newGroceryItem])
       });
     }
@@ -44,7 +45,9 @@ class GroceryList extends React.Component {
   // Fill the definition of the following method to allow clearing the list
   // Hint: You can just simply set the groceries to an empty array.
   clearList() {
-    // Put your code here
+    this.setState({
+      groceries: []
+    });
   }
 
   render() {
@@ -61,7 +64,7 @@ class GroceryList extends React.Component {
       );
     }
 
-    newProductInput = <input className='new-item' type="text" onChange={this.inputChanged}/>;
+    newProductInput = <input className='new-item' type="text" value={this.state.newGroceryName} onChange={this.inputChanged}/>;
     newProductAddButton = <button className='add-product' onClick={this.addGroceryItem}>Add new Product</button>;
     clearListButton = <button onClick={this.clearList} className='clear-list'>Clear the List</button>;
 
@@ -72,6 +75,7 @@ class GroceryList extends React.Component {
         </ul>
         {newProductInput}
         {newProductAddButton}
+        {clearListButton}
       </div>
     );
   }

@@ -59,7 +59,7 @@ class GroceryList extends React.Component {
 
   addGroceryItem() {
     if(this.state.newGroceryName) {
-      let newGroceryItem = { name: this.state.newGroceryName };
+      let newGroceryItem = { name: this.state.newGroceryName, completed: false };
       this.setState({
         groceries: this.state.groceries.concat([newGroceryItem])
       });
@@ -73,7 +73,15 @@ class GroceryList extends React.Component {
   // Fill the definition of the following method to allow completing each item
   // Hint 1: Pay attention to the element's index on the list.
   toggleGroceryCompleteness(groceryIndex) {
-    // Put your code here
+    let grocery = this.state.groceries[groceryIndex];
+    grocery.completed = !grocery.completed;
+
+    const groceries = [...this.state.groceries];
+    groceries[groceryIndex] = grocery;
+
+    this.setState({
+      groceries: groceries
+    });
   }
 
   render() {
